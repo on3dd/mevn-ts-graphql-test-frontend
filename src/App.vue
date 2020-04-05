@@ -19,6 +19,10 @@
     margin: 0;
   }
 
+  input:focus, textarea:focus, select:focus, button:focus{
+    outline: none;
+  }
+
   #app {
     /*height: 100%;*/
     /*width: 100%;*/

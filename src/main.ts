@@ -5,6 +5,14 @@ import store from './store';
 import ApolloClient from 'apollo-boost';
 import VueApollo from "vue-apollo";
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faPlus, faMinus, faEdit} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faPlus, faMinus, faEdit);
+
+Vue.component('FontAwesomeIcon', FontAwesomeIcon);
+
 Vue.config.productionTip = false;
 
 const apolloClient = new ApolloClient({
