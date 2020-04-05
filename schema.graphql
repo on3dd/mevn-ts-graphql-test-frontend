@@ -1,0 +1,42 @@
+directive @cacheControl(
+    maxAge: Int
+    scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+type Author {
+    name: String!
+}
+
+input AuthorInput {
+    name: String!
+}
+
+enum CacheControlScope {
+    PUBLIC
+    PRIVATE
+}
+
+type Message {
+    id: ID!
+    text: String!
+    author: Author!
+    date: String!
+}
+
+input MessageInput {
+    id: ID!
+    text: String!
+    date: String!
+    author: AuthorInput!
+}
+
+type Mutation {
+    addMessage(message: MessageInput!): Message!
+    addAuthor(author: AuthorInput!): Author!
+}
+
+type Query {
+    getAuthors: [Author]!
+    getMessages: [Message]!
+}
+
+scalar Upload

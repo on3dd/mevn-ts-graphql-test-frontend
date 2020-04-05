@@ -11,6 +11,7 @@
 <script lang="ts">
   import {Component, Vue, Prop} from "vue-property-decorator";
   import MessagesSectionListItem from "@/components/MessagesSectionListItem.vue";
+  import IMessage from "@/types/Message";
 
   @Component({
     components: {
@@ -18,7 +19,7 @@
     }
   })
   export default class MessagesSectionList extends Vue {
-    @Prop({type: Array, required: true}) data!: Array<any>;
+    @Prop({type: Array, required: true}) data!: IMessage[];
   }
 </script>
 

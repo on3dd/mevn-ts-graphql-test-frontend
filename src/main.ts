@@ -9,7 +9,7 @@ Vue.config.productionTip = false;
 
 const apolloClient = new ApolloClient({
   // You should use an absolute URL here
-  uri: 'https://localhost:3000/graphql',
+  uri: 'http://localhost:3000/graphql',
 });
 
 const apolloProvider = new VueApollo({
