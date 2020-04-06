@@ -1,30 +1,52 @@
 <template>
   <section class="messages-section">
     <h1 class="messages-section__header">Messages</h1>
+    <h2
+        v-if="apolloLoading"
+        class="messages-section__loading"
+    >
+      Loading...
+    </h2>
     <MessagesSectionList :data="messages"/>
-    <button class="messages-section__button-new">New message</button>
+    <button
+        @click="isModalVisible = true"
+        class="messages-section__button-new"
+    >New message
+    </button>
+
+    <transition name="fade">
+      <MessagesModal
+          v-if="isModalVisible"
+          @modalClose="isModalVisible = false"
+      />
+    </transition>
   </section>
 </template>
 
 <script lang="ts">
   import {Component, Vue} from "vue-property-decorator";
   import MessagesSectionList from "./MessagesSectionList.vue";
-  import getMessagesQuery from "@/graphql/messages";
+  import MessagesModal from "./MessagesModal.vue";
+  import getMessagesQuery from "@/graphql/getMessages";
   import IMessage from "@/types/Message";
 
   @Component({
     components: {
       MessagesSectionList,
+      MessagesModal,
     },
     apollo: {
       messages: () => getMessagesQuery,
     }
   })
   export default class MessagesSection extends Vue {
+    private apolloLoading = 0;
     private messages: IMessage[] = [];
 
+    private isModalVisible = false;
+
     async mounted() {
-      console.log(this.messages);
+      console.log('server messages:', this.messages);
     }
   }
 </script>
@@ -39,7 +61,7 @@
       font-size: 2rem;
       text-align: center;
     }
-    
+
     &__button-new {
       background: #2980b9;
       padding: 10px 15px;

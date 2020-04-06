@@ -1,8 +1,9 @@
 import { gql } from "apollo-boost";
 
 export default gql`
-    query {
-        messages: getMessages {
+    mutation AddMessage($message: MessageInput!) {
+        addMessage(message: $message) {
+            _id
             text
             date
             author {
